@@ -1,10 +1,12 @@
 // More details regarding config object can be found on https://github.com/axios/axios
 import axios from 'axios';
-
+import {
+  globalEventBus
+} from '../../modules/event-bus';
 
 class RootService {
   constructor() {
-    const headerData = globals.getHeaders() || {};
+    const headerData = {};
     const service = axios.create({
       headers: headerData,
     });
@@ -20,6 +22,21 @@ class RootService {
     return error;
   }
 
+  generateRequest(requestConfig, successCallback, errorCallback) {
+    return this.service(requestConfig)
+      .then(
+        response => successCallback(response),
+        (error) => {
+          if (!(error.response && error.response.status === httpStatusCodes.unauthorized)) {
+            window.location.reload();
+          }
+          if (!error.response || !error.response.data) {
+            globalEventBus.$emit('service-error');
+          }
+          errorCallback(error);
+        },
+      );
+  }
   delete(requestConfig, successCallback, errorCallback) {
     const config = requestConfig;
     config.method = 'delete';

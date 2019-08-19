@@ -78,7 +78,8 @@ module.exports = new Promise((resolve, reject) => {
       reject(err)
     } else {
       // publish the new Port, necessary for e2e tests
-      // port = 8080;
+      // TODO Forcing this to 8080 as dev server starts in random ports every time for weird reason.
+      port = 8080;
       process.env.PORT = port
 
       // add port to devServer config

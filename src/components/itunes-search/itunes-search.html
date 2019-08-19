@@ -1,4 +1,17 @@
-<div class="sample">
+<div class="itunes-search">
   <h1>{{ msg }}</h1>
   <h2>YOur content</h2>
+
+  <div class="search-container">
+    <div class="search-container">
+      <swiper :options="swiperOption">
+        <swiper-slide v-for="(slide, index) in swiperSlides" :key="index">I'm Slide {{ slide }}</swiper-slide>
+        <div class="swiper-pagination" slot="pagination"></div>
+        <div class="swiper-pagination" slot="pagination"></div>
+        <div class="swiper-button-prev" slot="button-prev"></div>
+        <div class="swiper-button-next" slot="button-next"></div>
+      </swiper>
+    </div>
+  </div>
+
 </div>

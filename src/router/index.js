@@ -10,9 +10,5 @@ export default new Router({
     path: '/',
     name: 'SearchPage',
     component: SearchPage
-  }, {
-    path: '/search',
-    name: 'SearchPage',
-    component: SearchPage
   }]
 })
