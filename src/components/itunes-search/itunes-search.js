@@ -15,6 +15,7 @@ const itunesSearch = {
   },
   data() {
     return {
+      searchResults: {},
       itunesService: new ItunesService(),
       msg: 'Search application',
       swiperOption: {
@@ -32,12 +33,16 @@ const itunesSearch = {
           prevEl: '.swiper-button-prev'
         }
       },
-      swiperSlides: [1, 2, 3, 4, 5],
     }
   },
   methods: {
-    searchDataHandler(data) {
-      alert(data);
+    searchDataHandler(response) {
+      if (response.data && response.data) {
+        // console.log(response.data.data.mediaResults);
+        this.searchResults = response.data.data.mediaResults;
+        console.log(this.searchResults);
+      }
+
     },
     searchDataErrorHandler(err) {
       console.log("search returned error", err);
@@ -47,10 +52,9 @@ const itunesSearch = {
     console.log("calling Mounted");
     const requestConfig = {};
     let searchTerm = 'Titanic';
-    alert(searchTerm);
     this.itunesService.getSearchData(requestConfig, this.searchDataHandler,
       this.searchDataErrorHandler, searchTerm);
-    // // this.swiperSlides.push();
+    // this.swiperSlides.push();
   },
   created() {
 
