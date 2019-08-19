@@ -28,7 +28,7 @@ class RootService {
         response => successCallback(response),
         (error) => {
           if (!(error.response && error.response.status === httpStatusCodes.unauthorized)) {
-            window.location.reload();
+            // Do something
           }
           if (!error.response || !error.response.data) {
             globalEventBus.$emit('service-error');

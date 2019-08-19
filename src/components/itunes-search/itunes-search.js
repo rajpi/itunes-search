@@ -1,5 +1,3 @@
-import VueMaterial from 'vue-material';
-
 import {
   swiper,
   swiperSlide,
@@ -12,7 +10,6 @@ const itunesSearch = {
   name: 'itunes-search',
   props: {},
   components: {
-    VueMaterial,
     swiper,
     swiperSlide,
   },
@@ -40,33 +37,33 @@ const itunesSearch = {
   },
   methods: {
     searchDataHandler(data) {
-      console.log(data);
+      alert(data);
     },
     searchDataErrorHandler(err) {
       console.log("search returned error", err);
     }
   },
   mounted() {
-
-  },
-  created() {
+    console.log("calling Mounted");
     const requestConfig = {};
     let searchTerm = 'Titanic';
     alert(searchTerm);
     this.itunesService.getSearchData(requestConfig, this.searchDataHandler,
       this.searchDataErrorHandler, searchTerm);
-    // this.swiperSlides.push();
+    // // this.swiperSlides.push();
+  },
+  created() {
 
 
   },
   render() {
-    if (!this.loaded) {
-      return this.$slots.loading[0]
-    }
+    // if (!this.loaded) {
+    //   return this.$slots.loading[0]
+    // }
 
-    return this.$scopedSlots.default({
-      response: {},
-    })
+    // return this.$scopedSlots.default({
+    //   response: {},
+    // })
   },
 }
 

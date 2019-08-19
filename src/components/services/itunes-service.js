@@ -4,9 +4,11 @@ class ItunesService extends RootService {
 
   getSearchData(requestConfig, successCallback, errorCallback, searchTerm) {
     const config = requestConfig;
+    config.headers = {
+      'Access-Control-Allow-Origin': '*'
+    }
     const endpoint = 'https://itunes-service.herokuapp.com/search?term=';
     config.url = endpoint + encodeURI(searchTerm);
-    // alert(config.url);
     this.get(config, successCallback, errorCallback);
   }
 }
