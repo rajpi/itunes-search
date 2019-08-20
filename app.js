@@ -9,7 +9,7 @@ var express = require('express'),
 
 // This is needed if the app is run on heroku:
 
-var port = process.env.PORT; // || 8080;
+var port = process.env.PORT || 8080;
 
 
 // Require the configuration and the routes files, and pass

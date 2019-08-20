@@ -16,14 +16,15 @@ const itunesSearch = {
   data() {
     return {
       searchResults: {},
+      searchTerm: '',
       itunesService: new ItunesService(),
       msg: 'Search application',
       swiperOption: {
-        slidesPerView: 3,
-        spaceBetween: 30,
-        slidesPerGroup: 3,
+        slidesPerView: 5,
+        spaceBetween: 20,
+        slidesPerGroup: 5,
         loop: true,
-        loopFillGroupWithBlank: true,
+        loopFillGroupWithBlank: false,
         pagination: {
           el: '.swiper-pagination',
           clickable: true
@@ -46,28 +47,24 @@ const itunesSearch = {
     },
     searchDataErrorHandler(err) {
       console.log("search returned error", err);
+    },
+    searchData() {
+      console.log("calling Mounted");
+      const requestConfig = {};
+      //let searchTerm = 'art';
+      this.itunesService.getSearchData(requestConfig, this.searchDataHandler,
+        this.searchDataErrorHandler, this.searchTerm);
     }
   },
   mounted() {
-    console.log("calling Mounted");
-    const requestConfig = {};
-    let searchTerm = 'Titanic';
-    this.itunesService.getSearchData(requestConfig, this.searchDataHandler,
-      this.searchDataErrorHandler, searchTerm);
-    // this.swiperSlides.push();
+
   },
   created() {
 
 
   },
   render() {
-    // if (!this.loaded) {
-    //   return this.$slots.loading[0]
-    // }
 
-    // return this.$scopedSlots.default({
-    //   response: {},
-    // })
   },
 }
 

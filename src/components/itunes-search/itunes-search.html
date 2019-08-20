@@ -1,25 +1,34 @@
 <div class="itunes-search">
   <h1>{{ msg }}</h1>
   <h2>YOur content</h2>
-
+  <div class="search-input">
+    <input v-model="searchTerm" placeholder="edit me">
+    <button v-on:click="searchData">Search</button>
+  </div>
   <div class="search-container">
-    <div class="search-container" v-if="searchResults && searchResults.song">
-      <swiper :options="swiperOption">
-        <swiper-slide v-for="(slide, index) in searchResults.song" :key="index">I'm Slide {{ slide.name }}
-        </swiper-slide>
-        <div class="swiper-pagination" slot="pagination"></div>
-        <div class="swiper-pagination" slot="pagination"></div>
-        <div class="swiper-button-prev" slot="button-prev"></div>
-        <div class="swiper-button-next" slot="button-next"></div>
-      </swiper>
-      <swiper :options="swiperOption">
-        <swiper-slide v-for="(slide, index) in searchResults.song" :key="index">I'm Slide {{ slide.name }}
-        </swiper-slide>
-        <div class="swiper-pagination" slot="pagination"></div>
-        <div class="swiper-pagination" slot="pagination"></div>
-        <div class="swiper-button-prev" slot="button-prev"></div>
-        <div class="swiper-button-next" slot="button-next"></div>
-      </swiper>
+    <div class="search-container" v-if="searchResults">
+      <div class="category-results" v-for="(categoryResults, searchCategoryName) in searchResults">
+        <h3 class="category heading"> {{ searchCategoryName }} </h3>
+        <swiper class="result-container" :options="swiperOption">
+          <swiper-slide class="result-slide" v-for="(slide, index) in categoryResults" :key="index">
+            <div class="result">
+              <h4 class="result-heading"> {{ slide.name }} </h4>
+              <input type="checkbox" id="fav" v-model="fav">
+              <div class="result-artcover-container" :src="slide.url">
+                <img class="result-artcover" :src="slide.artwork" height="100" width="100"> </img>
+              </div>
+              <div class="result-crumbs">
+                <span class="result-genre"> {{ slide.genre }}</span>
+                <span class="result-id"> {{ slide.id }}</span>
+              </div>
+            </div>
+          </swiper-slide>
+          <div class="swiper-pagination" slot="pagination"></div>
+          <div class="swiper-pagination" slot="pagination"></div>
+          <div class="swiper-button-prev" slot="button-prev"></div>
+          <div class="swiper-button-next" slot="button-next"></div>
+        </swiper>
+      </div>
     </div>
   </div>
 
