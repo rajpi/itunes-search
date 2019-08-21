@@ -5,6 +5,7 @@ import {
 
 import 'swiper/dist/css/swiper.css';
 import ItunesService from '../services/itunes-service';
+import FavoriteService from '../services/favorite-service';
 
 const itunesSearch = {
   name: 'itunes-search',
@@ -17,7 +18,10 @@ const itunesSearch = {
     return {
       searchResults: {},
       searchTerm: '',
+      isActive: false,
+      favoriteItems: [],
       itunesService: new ItunesService(),
+      favoriteService: new FavoriteService(),
       msg: 'Search application',
       swiperOption: {
         slidesPerView: 5,
@@ -32,16 +36,40 @@ const itunesSearch = {
         navigation: {
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev'
-        }
+        },
+      },
+      sliderOptions: {
+        desktop: {
+          slides: 4,
+          spaceAllowed: 0,
+        },
+        tablet: {
+          slides: 4,
+          spaceAllowed: 16,
+        },
+        mobile: {
+          slides: 2,
+          spaceAllowed: 16,
+        },
       },
     }
   },
   methods: {
     searchDataHandler(response) {
       if (response.data && response.data) {
-        // console.log(response.data.data.mediaResults);
         this.searchResults = response.data.data.mediaResults;
-        console.log(this.searchResults);
+
+        for (var key in this.searchResults) {
+          this.searchResults[key].forEach(searchItem => {
+            this.favoriteItems.forEach(favItem => {
+              console.log(searchItem.id === favItem.id);
+              if (searchItem.id === favItem.id) {
+                searchItem.isActive = true;
+              }
+            })
+
+          });
+        }
       }
 
     },
@@ -49,15 +77,23 @@ const itunesSearch = {
       console.log("search returned error", err);
     },
     searchData() {
-      console.log("calling Mounted");
       const requestConfig = {};
-      //let searchTerm = 'art';
       this.itunesService.getSearchData(requestConfig, this.searchDataHandler,
         this.searchDataErrorHandler, this.searchTerm);
-    }
+    },
+    toggleFavorite(item) {
+      item.isActive = !item.isActive;
+      console.log("item", item);
+      if (item.isActive) {
+        this.favoriteService.saveFavorite(item);
+      } else {
+        this.favoriteService.removeFavorite(item);
+      }
+    },
   },
-  mounted() {
 
+  mounted() {
+    this.favoriteItems = this.favoriteService.getFavoriteData();
   },
   created() {
 
