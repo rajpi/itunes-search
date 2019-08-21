@@ -2,7 +2,7 @@ import {
   swiper,
   swiperSlide,
 } from 'vue-awesome-swiper';
-
+import Vue from 'vue';
 import 'swiper/dist/css/swiper.css';
 import ItunesService from '../services/itunes-service';
 import FavoriteService from '../services/favorite-service';
@@ -18,8 +18,9 @@ const itunesSearch = {
     return {
       searchResults: {},
       searchTerm: '',
-      isActive: false,
+      //  isActive: false,
       favoriteItems: [],
+      showSpinner: false,
       itunesService: new ItunesService(),
       favoriteService: new FavoriteService(),
       msg: 'Search application',
@@ -27,8 +28,8 @@ const itunesSearch = {
         slidesPerView: 5,
         spaceBetween: 20,
         slidesPerGroup: 5,
-        loop: true,
-        loopFillGroupWithBlank: false,
+        // loop: true,
+        loopFillGroupWithBlank: true,
         pagination: {
           el: '.swiper-pagination',
           clickable: true
@@ -37,19 +38,22 @@ const itunesSearch = {
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev'
         },
-      },
-      sliderOptions: {
-        desktop: {
-          slides: 4,
-          spaceAllowed: 0,
-        },
-        tablet: {
-          slides: 4,
-          spaceAllowed: 16,
-        },
-        mobile: {
-          slides: 2,
-          spaceAllowed: 16,
+        breakpoints: {
+          // when window width is <= 767px
+          320: {
+            slidesPerView: 1,
+            spaceBetween: 10,
+          },
+          // when window width is <= 1023px
+          767: {
+            slidesPerView: 2,
+            spaceBetween: 10,
+          },
+          // when window width is <= 1440px
+          1024: {
+            slidesPerView: 5,
+            spaceBetween: 10,
+          },
         },
       },
     }
@@ -57,17 +61,18 @@ const itunesSearch = {
   methods: {
     searchDataHandler(response) {
       if (response.data && response.data) {
+        this.showSpinner = false;
         this.searchResults = response.data.data.mediaResults;
-
         for (var key in this.searchResults) {
           this.searchResults[key].forEach(searchItem => {
-            this.favoriteItems.forEach(favItem => {
-              console.log(searchItem.id === favItem.id);
+            for (let favItem of this.favoriteItems) {
               if (searchItem.id === favItem.id) {
                 searchItem.isActive = true;
+                break;
+              } else {
+                searchItem.isActive = false;
               }
-            })
-
+            }
           });
         }
       }
@@ -78,12 +83,14 @@ const itunesSearch = {
     },
     searchData() {
       const requestConfig = {};
+      this.showSpinner = true;
       this.itunesService.getSearchData(requestConfig, this.searchDataHandler,
         this.searchDataErrorHandler, this.searchTerm);
     },
     toggleFavorite(item) {
       item.isActive = !item.isActive;
-      console.log("item", item);
+      Vue.set(item, 'isActive', item.isActive);
+      console.log("item==", item, this.searchResults);
       if (item.isActive) {
         this.favoriteService.saveFavorite(item);
       } else {

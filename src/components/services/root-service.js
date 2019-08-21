@@ -27,12 +27,6 @@ class RootService {
       .then(
         response => successCallback(response),
         (error) => {
-          if (!(error.response && error.response.status === httpStatusCodes.unauthorized)) {
-            // Do something
-          }
-          if (!error.response || !error.response.data) {
-            globalEventBus.$emit('service-error');
-          }
           errorCallback(error);
         },
       );

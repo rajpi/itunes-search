@@ -22,6 +22,7 @@
 /** GLobal styles**/
 body {
   font-family: @font-family-poppins;
+  background: #f1f2f4;
 }
 h1,
 h2 {
@@ -36,10 +37,28 @@ li {
   margin: 0 10px;
 }
 a {
-  color: #42b983;
+  color: #32476e;
 }
 
-button.favorite {
+.heading-section {
+  background-color: @primary-color;
+  padding-left: 30px;
+  color: @secondary-color;
+  margin-top: -20px;
+  padding: 20px;
+  margin-bottom: 30px;
+  .page-heading {
+    font-size: 32px;
+    color: white;
+  }
+  .page-subheading {
+    font-size: 21px;
+    margin: -0px;
+    //padding: 10px;
+  }
+}
+
+button.fav {
   display: block;
   outline: 0;
   padding: 0;
@@ -51,15 +70,20 @@ button.favorite {
 
 /* Itunes search page styles */
 .itunes-search {
-  background-color: antiquewhite;
   height: 100%;
-  .md-subhead {
-    color: darkblue;
+
+  .search-input-holder {
+    width: 100%;
+    padding: 20px;
+    margin: 0 auto;
+    display: inline-block;
+    .form-control {
+      // width: 60%;
+    }
   }
   .search-container {
     height: 300px;
     padding: 10px;
-    margin-top: 50px;
     .category-results {
       min-height: 300px;
       padding: 10px;
@@ -83,8 +107,35 @@ button.favorite {
         }
         .result-slide {
           min-height: 300px;
-          border: 2px solid black;
+          // border: 2px solid black;
           .result {
+            .tile-icon {
+              float: right;
+              .fav {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                top: 0;
+                margin-bottom: 0;
+                height: 48px;
+                line-height: 16px;
+                border-radius: 0 0 4px 4px;
+                max-height: 30px;
+                width: 30px;
+              }
+              .fav.active svg #fill {
+                position: absolute;
+                z-index: 10;
+                transform-origin: 20% 20%;
+                animation: heartBeat 0.5s 1 cubic-bezier(0.16, 1.32, 0.91, 1.26);
+                animation-fill-mode: none;
+                animation-fill-mode: forwards;
+                fill: @primary-color;
+              }
+            }
+            .tile-icon svg.heart {
+              fill: #dcd8d5;
+            }
             .result-artcover-container {
               margin: 0 auto;
               width: 80%;
@@ -113,6 +164,11 @@ button.favorite {
     }
     .swiper-slide {
       justify-content: center;
+      text-align: center;
+      background: white;
+      border-radius: 4px;
+      padding: 10px;
+      padding-top: 20px;
       .image-tile {
         img {
           margin: 0 auto;

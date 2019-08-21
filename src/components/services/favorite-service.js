@@ -13,7 +13,6 @@ class FavoriteService extends RootService {
     var favItems = globals.storage.getData('favItems');
     if (favItems) {
       favItems.forEach((favItem, indx) => {
-        console.log(favItem, indx)
         if (favItem.id === unfavItem.id) {
           favItems.splice(indx, 1);
           globals.storage.setData('favItems', favItems);

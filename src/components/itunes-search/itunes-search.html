@@ -1,46 +1,38 @@
 <div class="itunes-search">
-  <h1>{{ msg }}</h1>
-  <h2>YOur content</h2>
-  <div class="search-input">
-    <input v-model="searchTerm" placeholder="edit me">
-    <button v-on:click="searchData">Search</button>
+  <div class="heading-section">
+    <h1 class="page-heading">{{ msg }}</h1>
+    <h2 class="page-subheading">Your content goes here</h2>
   </div>
+
+  <form role="form" class="search-input-holder row">
+    <div class="col-xs-12">
+      <div class="input-group input-group-lg">
+        <input type="text" class="search-input form-control input-lg" v-model="searchTerm"
+          placeholder="Search something today!!" />
+        <div class="input-group-btn">
+          <button type="submit" class="search-btn btn btn-secondary btn-lg" v-on:click="searchData">
+            <span class="glyphicon glyphicon-search"></span> <span> Search </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
   <div class="search-container">
-    <div class="search-container" v-if="searchResults">
+    <div class="search-results-container" v-if="searchResults">
+      <div> Showing results for {{ searchTerm }} </div>
       <div class="category-results" v-for="(categoryResults, searchCategoryName) in searchResults">
         <h3 class="category heading"> {{ searchCategoryName }} </h3>
         <swiper class="result-container" :options="swiperOption">
           <swiper-slide class="result-slide" v-for="(result, index) in categoryResults" :key="index">
             <div class="result">
-              <h4 class="result-heading"> {{ result.name }} </h4>
-
-              <div @click.prevent="toggleFavorite(result)" class="tile-icon fav-container">
-                <button class="favorite tile-button" v-bind:class="{ 'active': isActive }" title="fav icon"
-                  aria-label="save to favorite">
-                  <svg preserveAspectRatio="xMidYMin slice" width="25" height="25" viewBox="0 0 25 25" version="1.1"
-                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="heart">
-                    <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
-                    <desc>Created with Sketch.</desc>
-                    <defs></defs>
-                    <g id="UI-Desktop" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                      <g id="PDP-Desktop-/-No-Subscription-/-R1" transform="translate(-1266.000000, -293.000000)"
-                        fill-rule="nonzero">
-                        <g id="Save-for-later" transform="translate(1266.000000, 292.000000)">
-                          <g id="heart-(5)">
-                            <path
-                              d="M23.4518256,7.5 C23.4518256,9.22443585 22.7665872,10.8781987 21.5471068,12.0971068 L12.7071068,20.9371068 C12.3165825,21.3276311 11.6834175,21.3276311 11.2928932,20.9371068 L2.45289321,12.0971068 C-0.0860186957,9.55819479 -0.0860186651,5.44180522 2.45289328,2.90289328 C4.99180522,0.363981335 9.10819479,0.363981304 11.6471068,2.90289322 L12,3.25578645 L12.3527273,2.9030592 C13.5718013,1.68341276 15.2255641,0.998174379 16.95,0.998174379 C18.6743576,0.998174379 20.3280486,1.68335058 21.5471068,2.9028932 C22.7666494,4.12195139 23.4518256,5.77564239 23.4518256,7.5 Z M12,18.8157864 L19.0728932,11.7428932 L20.1330592,10.6827273 C20.9774298,9.83875293 21.4518256,8.6938402 21.4518256,7.5 C21.4518256,6.3061598 20.9774298,5.16124707 20.1330592,4.31727273 C19.2887529,3.47257018 18.1438402,2.99817438 16.95,2.99817438 C15.7561598,2.99817438 14.6112471,3.47257018 13.7671068,4.31710678 L12.7071068,5.37710678 C12.3165825,5.76763107 11.6834175,5.76763107 11.2928932,5.37710678 L10.2328932,4.31710679 C8.47502984,2.55924345 5.62497021,2.55924347 3.86710684,4.31710684 C2.10924347,6.07497021 2.10924345,8.92502984 3.86710678,10.6828932 L12,18.8157864 Z"
-                              id="heart-outline" fill="#000000"></path>
-                            <path
-                              d="M12,18.8157864 L19.0728932,11.7428932 L20.1330592,10.6827273 C20.9774298,9.83875293 21.4518256,8.6938402 21.4518256,7.5 C21.4518256,6.3061598 20.9774298,5.16124707 20.1330592,4.31727273 C19.2887529,3.47257018 18.1438402,2.99817438 16.95,2.99817438 C15.7561598,2.99817438 14.6112471,3.47257018 13.7671068,4.31710678 L12.7071068,5.37710678 C12.3165825,5.76763107 11.6834175,5.76763107 11.2928932,5.37710678 L10.2328932,4.31710679 C8.47502984,2.55924345 5.62497021,2.55924347 3.86710684,4.31710684 C2.10924347,6.07497021 2.10924345,8.92502984 3.86710678,10.6828932 L12,18.8157864 Z"
-                              id="fill" fill="#FFFFFF"></path>
-                          </g>
-                        </g>
-                      </g>
-                    </g>
-                  </svg>
-                  <!-- <svg v-else version="1.1" xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink" class="heart" viewBox="0 0 25 25"
-                    preserveAspectRatio="none" width="20" height="20">
+              <div class="result-artcover-container" :src="result.url">
+                <img class="result-artcover" :src="result.artwork" height="100" width="100"> </img>
+              </div>
+              <div class="tile-icon fav-container">
+                <button @click.prevent="toggleFavorite(result)" class="fav tile-button"
+                  v-bind:class="{ 'active': result.isActive }" title="fav icon" aria-label="save to favorite">
+                  <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                    viewBox="0 0 25 25" preserveAspectRatio="none" width="20" height="20" class="heart">
                     <g id="Page-1" stroke="none" stroke-width="2" fill="none" fill-rule="evenodd">
                       <g id="heart-outline" transform="translate(1.000000, 0.000000),scale(0.75, 0.8)" stroke="#999">
                         <path id="fill"
@@ -48,16 +40,14 @@
                           fill="#ffffff"></path>
                       </g>
                     </g>
-                  </svg> -->
+                  </svg>
                 </button>
               </div>
 
-              <div class="result-artcover-container" :src="result.url">
-                <img class="result-artcover" :src="result.artwork" height="100" width="100"> </img>
-              </div>
+              <h3 class="result-heading"> {{ result.name }} </h3>
               <div class="result-crumbs">
-                <span class="result-genre"> {{ result.genre }}</span>
-                <span class="result-id"> {{ result.id }}</span>
+                <div class="result-genre"> {{ result.genre }}</div>
+                <div class="result-id"> {{ result.id }}</div>
               </div>
             </div>
           </swiper-slide>
@@ -68,6 +58,13 @@
         </swiper>
       </div>
     </div>
+    <div v-else>
+      <div> No results found for " {{searchTerm }} " </div>
+    </div>
   </div>
-
+  <div class="loader" v-bind:class="{ 'active': showSpinner }">
+    <div class="spinner-border" style="width: 30px; height: 30px;" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
 </div>
