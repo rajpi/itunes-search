@@ -14,20 +14,21 @@ Itegration with custom Itunes service
 @screen-sm-min: 768px;
 @screen-xs-min: 360px;
 /** colors **/
-@primary-color: #32476e;
+@primary-color: #2d2d2d;
 @secondary-color: #cecece;
+@fav-icon-fill-color: #DC143C;
 
 /** sizes **/
 @font-family-poppins: "Poppins", sans-serif;
 @font-weight-regular: 400;
-@font-size-h3: 21px;
+@font-size-h3: 18px;
 @font-size-large: 16px;
 @letter-spacing-default: 0.15px;
 
 /** GLobal styles**/
 body {
   font-family: @font-family-poppins;
-  background: #f1f2f4;
+  background: #fafafa;
 }
 h1,
 h2 {
@@ -42,23 +43,32 @@ li {
   margin: 0 10px;
 }
 a {
-  color: #32476e;
+  color: #2d2d2d;
 }
 
-.heading-section {
-  background-color: @primary-color;
-  padding-left: 30px;
-  color: @secondary-color;
-  margin-top: -20px;
-  padding: 20px;
-  margin-bottom: 30px;
+.header-section {
+  .header-top-section {
+    background-color: @primary-color;
+    height: 50px;
+    // margin-top: -20px;
+    margin-bottom: 30px;
+    width: 100%;
+    .header-logo {
+      margin-left: 30px;
+      // width: 16px;
+      // height: 20px;
+      // background-color: red;
+    }
+  }
   .page-heading {
-    font-size: 32px;
-    color: white;
+    margin-left: 30px;
+    font-size: 28px;
+    color: @primary-color;
   }
   .page-subheading {
+    margin-left: 30px;
     font-size: 21px;
-    margin: -0px;
+    margin: 0px;
     //padding: 10px;
   }
 }
@@ -79,11 +89,17 @@ button.fav {
 
   .search-input-holder {
     width: 100%;
-    padding: 20px;
+    padding: 15px;
     margin: 0 auto;
     display: inline-block;
+    @media (min-width: @screen-sm-min) {
+      //width: 60%;
+    }
     .form-control {
       // width: 60%;
+    }
+    .search-btn {
+      background-color: @primary-color;
     }
   }
   .search-container {
@@ -141,21 +157,23 @@ button.fav {
                 position: absolute;
                 z-index: 10;
                 transform-origin: 20% 20%;
-                animation: heartBeat 0.5s 1 cubic-bezier(0.16, 1.32, 0.91, 1.26);
-                animation-fill-mode: none;
+                animation: heartBeat .5s 1 cubic-bezier(.16,1.32,.91,1.26);
                 animation-fill-mode: forwards;
-                fill: @primary-color;
+                fill: @fav-icon-fill-color;
+              }
+              .fav.active svg #heart-outline {
+                stroke: @fav-icon-fill-color;
               }
             }
             .tile-icon svg.heart {
-              fill: #dcd8d5;
+              // fill: #dcd8d5;
             }
             .result-artcover-container {
               margin: 0 auto;
               width: 80%;
               width: 144px;
               @media (min-width: @screen-sm-min) {
-                width: 151px;
+                width: 150px;
               }
               @media (min-width: @screen-md-min) {
                 width: 215px;

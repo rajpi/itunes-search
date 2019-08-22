@@ -23,8 +23,8 @@ const itunesSearch = {
       showSpinner: false,
       itunesService: new ItunesService(),
       favoriteService: new FavoriteService(),
-      heading: 'Itunes Sweet Search',
-      subHeading: 'Search something today',
+      heading: 'Itunes Search',
+      subHeading: '',
       swiperOption: {
         slidesPerView: 5,
         spaceBetween: 20,

@@ -1,22 +1,26 @@
 <div class="itunes-search">
-  <div class="heading-section">
+  <div class="header-section">
+    <div class="header-top-section">
+      <a class="header-logo" href="/">
+        <img alt="apple-logo" src="https://www.apple.com/ac/globalnav/4/en_US/images/globalnav/apple/image_large.svg">
+      </a>
+    </div>
     <h1 class="page-heading">{{ heading }}</h1>
     <h2 class="page-subheading">{{ subHeading }}</h2>
   </div>
-
-  <form role="form" class="search-input-holder row">
+  <div class="search-input-holder row">
     <div class="col-xs-12">
       <div class="input-group input-group-lg">
-        <input type="text" class="search-input form-control input-lg" v-model="searchTerm"
+        <input @keyup.enter="searchData" type="text" class="search-input form-control input-lg" v-model="searchTerm"
           placeholder="Search something today!!" />
         <div class="input-group-btn">
           <button type="submit" class="search-btn btn btn-primary btn-lg" v-on:click="searchData">
-            <span class="glyphicon glyphicon-search"></span> <span> Search </span>
+            <span class="glyphicon glyphicon-search"></span> <span> </span>
           </button>
         </div>
       </div>
     </div>
-  </form>
+  </div>
   <div class="search-container">
     <div class="search-results-container" v-if="searchResults">
       <div class="result-notification"> Showing results for {{ searchTerm }} </div>
