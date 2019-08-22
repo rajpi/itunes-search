@@ -23,14 +23,15 @@
   </div>
   <div class="search-container">
     <div class="search-results-container" v-if="searchResults">
-      <div class="result-notification"> Showing results for {{ searchTerm }} </div>
+      <!-- <div class="result-notification"> Showing results for {{ searchTerm }} </div> -->
       <div class="category-results" v-for="(categoryResults, searchCategoryName) in searchResults">
         <h3 class="category-heading"> Category: {{ searchCategoryName }} </h3>
         <swiper class="result-container" :options="swiperOption">
           <swiper-slide class="result-slide" v-for="(result, index) in categoryResults" :key="index">
             <div class="result">
               <div class="result-artcover-container">
-                <a :href="result.url"> <img class="result-artcover" :src="result.artwork" height="100" width="100"> </img> </a>
+                <a :href="result.url"> <img class="result-artcover" :src="result.artwork" height="100" width="100">
+                  </img> </a>
               </div>
               <div class="tile-icon fav-container">
                 <button @click.prevent="toggleFavorite(result)" class="fav tile-button"
@@ -61,23 +62,23 @@
           <div class="swiper-button-next" slot="button-next"></div>
         </swiper>
       </div>
-      
+
     </div>
     <div v-else>
       <div v-if="searchTerm.length" class="result-notification"> No results found for " {{searchTerm }} " </div>
     </div>
 
   </div>
-  <div class="loader-container" v-bind:class="{ 'active': showSpinner }" >
-      <div class="row">
-          <div class="col-md-12">
-              <div class="loader">
-                  <p>Loading...</p>
-                  <div class="loader-inner"></div>
-                  <div class="loader-inner"></div>
-                  <div class="loader-inner"></div>
-              </div>
-          </div>
+  <div class="loader-container" v-bind:class="{ 'active': showSpinner }">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="loader">
+          <p>Loading...</p>
+          <div class="loader-inner"></div>
+          <div class="loader-inner"></div>
+          <div class="loader-inner"></div>
+        </div>
       </div>
+    </div>
   </div>
 </div>
