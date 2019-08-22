@@ -84,10 +84,17 @@ button.fav {
   .search-container {
     height: 300px;
     padding: 10px;
+    .result-notification {
+      padding-left: 20px;
+    }
     .category-results {
       min-height: 300px;
       padding: 10px;
       margin-bottom: 30px;
+      .category-heading {
+        padding: 5px;
+        text-transform: capitalize;
+      }
       .result-container {
         h3 {
           font-size: @font-size-large;
@@ -117,11 +124,13 @@ button.fav {
                 left: 0;
                 top: 0;
                 margin-bottom: 0;
-                height: 48px;
+                height: 50px;
                 line-height: 16px;
                 border-radius: 0 0 4px 4px;
                 max-height: 30px;
                 width: 30px;
+                margin-top: 10px;
+                margin-left: 15px;
               }
               .fav.active svg #fill {
                 position: absolute;
@@ -146,8 +155,8 @@ button.fav {
               @media (min-width: @screen-md-min) {
                 width: 215px;
                 .result-artcover {
-                  height: 150px;
-                  width: 150px;
+                  height: 200px;
+                  width: 200px;
                   padding: 20px;
                 }
               }
