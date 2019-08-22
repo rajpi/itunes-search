@@ -40,17 +40,17 @@ const itunesSearch = {
           prevEl: '.swiper-button-prev'
         },
         breakpoints: {
-          // when window width is <= 767px
+          // when window width is <= 320
           320: {
             slidesPerView: 1,
             spaceBetween: 10,
           },
-          // when window width is <= 1023px
+          // when window width is <= 767
           767: {
             slidesPerView: 2,
             spaceBetween: 10,
           },
-          // when window width is <= 1440px
+          // when window width is <= 1024
           1024: {
             slidesPerView: 5,
             spaceBetween: 10,
@@ -60,10 +60,16 @@ const itunesSearch = {
     }
   },
   methods: {
+    /**
+     * Search response handler
+     * @param  {Object} response response object
+     */
     searchDataHandler(response) {
       if (response.data && response.data) {
         this.showSpinner = false;
         this.searchResults = response.data.data.mediaResults;
+
+        // Getting favroites that user has selected previously
         for (var key in this.searchResults) {
           this.searchResults[key].forEach(searchItem => {
             for (let favItem of this.favoriteItems) {
@@ -81,17 +87,33 @@ const itunesSearch = {
       }
 
     },
+
+    /**
+     * Search Response Error handler
+     * @param  {[type]} err [description]
+     * @return {[type]}     [description]
+     */
     searchDataErrorHandler(err) {
       console.log("search returned error", err);
     },
+    /**
+     * Search button handler
+     * @return {[type]} [description]
+     */
     searchData() {
       const requestConfig = {};
       this.showSpinner = true;
       this.itunesService.getSearchData(requestConfig, this.searchDataHandler,
         this.searchDataErrorHandler, this.searchTerm);
     },
+
+    /**
+     * Toggle Favorite handler
+     * @param  {Object} item Search result item
+     */
     toggleFavorite(item) {
       item.isActive = !item.isActive;
+      // Changing the state
       this.$set(item, 'isActive', item.isActive);
       if (item.isActive) {
         this.favoriteService.saveFavorite(item);

@@ -1,3 +1,8 @@
+<!--
+Itunes-search component provides search input for the user to enter and search results
+Itegration with custom Itunes service
+-->
+
 <template src="./itunes-search.html"></template>
 <script src="./itunes-search.js"></script>
 <!-- <style src="./itunes-search.less" lang="less"></style> -->

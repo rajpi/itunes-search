@@ -1,10 +1,16 @@
 # itunes-search
 
-> Itunes Custom Search
+> Itunes Custom Search implementation
+
+Tech Stack Vue.js Webpack NodeJs Heroku hosting
+https://i-search.herokuapp.com/
+
+Integration with Itunes custom service hosted on
+https://itunes-service.herokuapp.com/search?term=haha
 
 ## Build Setup
 
-``` bash
+```bash
 # install dependencies
 npm install
 
