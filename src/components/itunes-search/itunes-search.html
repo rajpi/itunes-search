@@ -61,10 +61,11 @@
     <div v-else>
       <div v-if="searchTerm.length" class="result-notification"> No results found for " {{searchTerm }} " </div>
     </div>
-  </div>
-  <div class="loader" v-bind:class="{ 'active': showSpinner }">
-    <div class="spinner-border" style="width: 30px; height: 30px;" role="status">
-      <span class="sr-only">Loading...</span>
+    <div class="loader" v-bind:class="{ 'active': showSpinner }">
+      <div class="spinner-border" style="width: 30px; height: 30px;" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
     </div>
+
   </div>
 </div>

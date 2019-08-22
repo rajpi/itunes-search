@@ -18,7 +18,7 @@ const itunesSearch = {
     return {
       searchResults: {},
       searchTerm: '',
-      //  isActive: false,
+      isActive: false,
       favoriteItems: [],
       showSpinner: false,
       itunesService: new ItunesService(),
@@ -68,10 +68,12 @@ const itunesSearch = {
           this.searchResults[key].forEach(searchItem => {
             for (let favItem of this.favoriteItems) {
               if (searchItem.id === favItem.id) {
-                searchItem.isActive = true;
+                // searchItem.isActive = true;
+                this.$set(searchItem, 'isActive', true);
                 break;
               } else {
-                searchItem.isActive = false;
+                // searchItem.isActive = false;
+                this.$set(searchItem, 'isActive', false);
               }
             }
           });
@@ -90,8 +92,7 @@ const itunesSearch = {
     },
     toggleFavorite(item) {
       item.isActive = !item.isActive;
-      Vue.set(item, 'isActive', item.isActive);
-      console.log("item==", item, this.searchResults);
+      this.$set(item, 'isActive', item.isActive);
       if (item.isActive) {
         this.favoriteService.saveFavorite(item);
       } else {
