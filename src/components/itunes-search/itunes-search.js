@@ -72,14 +72,12 @@ const itunesSearch = {
         // Getting favroites that user has selected previously
         for (var key in this.searchResults) {
           this.searchResults[key].forEach(searchItem => {
+            this.$set(searchItem, 'isActive', false);
             for (let favItem of this.favoriteItems) {
               if (searchItem.id === favItem.id) {
                 // searchItem.isActive = true;
                 this.$set(searchItem, 'isActive', true);
                 break;
-              } else {
-                // searchItem.isActive = false;
-                this.$set(searchItem, 'isActive', false);
               }
             }
           });
