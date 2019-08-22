@@ -64,8 +64,9 @@
       </div>
 
     </div>
-    <div v-else>
-      <div v-if="searchTerm.length" class="result-notification"> No results found for " {{searchTerm }} " </div>
+    <div v-if="searchTerm.length && isNoresults">
+      <div class="result-notification"> No results found for " {{searchTerm }} "
+      </div>
     </div>
 
   </div>

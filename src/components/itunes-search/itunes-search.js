@@ -21,6 +21,7 @@ const itunesSearch = {
       isActive: false,
       favoriteItems: [],
       showSpinner: false,
+      isNoresults: false,
       itunesService: new ItunesService(),
       favoriteService: new FavoriteService(),
       heading: 'Itunes Search',
@@ -94,6 +95,7 @@ const itunesSearch = {
     searchDataErrorHandler(err) {
       this.searchResults = {};
       this.showSpinner = false;
+      this.isNoresults = true;
       console.log("search returned error", err);
     },
     /**
@@ -103,6 +105,7 @@ const itunesSearch = {
     searchData() {
       const requestConfig = {};
       this.showSpinner = true;
+      this.isNoresults = false;
       this.itunesService.getSearchData(requestConfig, this.searchDataHandler,
         this.searchDataErrorHandler, this.searchTerm);
     },
