@@ -25,7 +25,7 @@
     <div class="search-results-container" v-if="searchResults">
       <!-- <div class="result-notification"> Showing results for {{ searchTerm }} </div> -->
       <div class="category-results" v-for="(categoryResults, searchCategoryName) in searchResults">
-        <h3 class="category-heading"> Category: {{ searchCategoryName }} </h3>
+        <h3 class="category-heading"> {{ searchCategoryName }}s </h3>
         <swiper class="result-container" :options="swiperOption">
           <swiper-slide class="result-slide" v-for="(result, index) in categoryResults" :key="index">
             <div class="result">
