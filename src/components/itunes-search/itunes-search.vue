@@ -139,6 +139,7 @@ button.fav {
   position: absolute;
   width: 100%;
   height: 100%;
+  overflow: hidden;
   background-color: rgba(47, 47, 47, 0.1);
   top: 0;
   padding-top: 250px;
