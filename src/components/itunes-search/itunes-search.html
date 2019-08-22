@@ -29,8 +29,8 @@
         <swiper class="result-container" :options="swiperOption">
           <swiper-slide class="result-slide" v-for="(result, index) in categoryResults" :key="index">
             <div class="result">
-              <div class="result-artcover-container" :src="result.url">
-                <img class="result-artcover" :src="result.artwork" height="100" width="100"> </img>
+              <div class="result-artcover-container">
+                <a :href="result.url"> <img class="result-artcover" :src="result.artwork" height="100" width="100"> </img> </a>
               </div>
               <div class="tile-icon fav-container">
                 <button @click.prevent="toggleFavorite(result)" class="fav tile-button"
@@ -50,7 +50,7 @@
 
               <h3 class="result-heading"> {{ result.name }} </h3>
               <div class="result-crumbs">
-                <div class="result-genre"> {{ result.genre }}</div>
+                <div class="result-genre"> {{ result.genre }} </div>
                 <div class="result-id"> {{ result.id }}</div>
               </div>
             </div>
@@ -65,6 +65,9 @@
     <div v-else>
       <div v-if="searchTerm.length" class="result-notification"> No results found for " {{searchTerm }} " </div>
     </div>
+    <div class="spinner-border" style="width: 30px; height: 30px;" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
     <div class="loader" v-bind:class="{ 'active': showSpinner }">
       <div class="spinner-border" style="width: 30px; height: 30px;" role="status">
         <span class="sr-only">Loading...</span>
