@@ -16,7 +16,7 @@ Itegration with custom Itunes service
 /** colors **/
 @primary-color: #2d2d2d;
 @secondary-color: #cecece;
-@fav-icon-fill-color: #DC143C;
+@fav-icon-fill-color: #dc143c;
 
 /** sizes **/
 @font-family-poppins: "Poppins", sans-serif;
@@ -63,7 +63,7 @@ a {
   .page-heading {
     margin-left: 30px;
     font-size: 28px;
-    color: @primary-color;
+    color: #474747;
   }
   .page-subheading {
     margin-left: 30px;
@@ -83,6 +83,72 @@ button.fav {
   position: relative;
 }
 
+.loader {
+  width: 70px;
+  height: 70px;
+  margin: 40px auto;
+  opacity: 1;
+}
+.loader p {
+  font-size: 16px;
+  color: @primary-color;
+}
+.loader .loader-inner {
+  display: inline-block;
+  width: 15px;
+  border-radius: 15px;
+  background: @primary-color;
+}
+.loader .loader-inner:nth-last-child(1) {
+  -webkit-animation: loading 1s 1s infinite;
+  animation: loading 1s 1s infinite;
+}
+.loader .loader-inner:nth-last-child(2) {
+  -webkit-animation: loading 0.6s 0.5s infinite;
+  animation: loading 0.6s 0.5s infinite;
+}
+.loader .loader-inner:nth-last-child(3) {
+  -webkit-animation: loading 0.8s 0s infinite;
+  animation: loading 0.8s 0s infinite;
+}
+@-webkit-keyframes loading {
+  0% {
+    height: 15px;
+  }
+  50% {
+    height: 35px;
+  }
+  100% {
+    height: 15px;
+  }
+}
+@keyframes loading {
+  0% {
+    height: 15px;
+  }
+  50% {
+    height: 35px;
+  }
+  100% {
+    height: 15px;
+  }
+}
+
+.loader-container {
+  display: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(47, 47, 47, 0.1);
+  top: 0;
+  padding-top: 250px;
+  z-index: 999;
+}
+
+.loader-container.active {
+  display: block;
+}
+
 /* Itunes search page styles */
 .itunes-search {
   height: 100%;
@@ -92,12 +158,6 @@ button.fav {
     padding: 15px;
     margin: 0 auto;
     display: inline-block;
-    @media (min-width: @screen-sm-min) {
-      //width: 60%;
-    }
-    .form-control {
-      // width: 60%;
-    }
     .search-btn {
       background-color: @primary-color;
     }
@@ -157,7 +217,7 @@ button.fav {
                 position: absolute;
                 z-index: 10;
                 transform-origin: 20% 20%;
-                animation: heartBeat .5s 1 cubic-bezier(.16,1.32,.91,1.26);
+                animation: heartBeat 0.5s 1 cubic-bezier(0.16, 1.32, 0.91, 1.26);
                 animation-fill-mode: forwards;
                 fill: @fav-icon-fill-color;
               }

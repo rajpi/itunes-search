@@ -61,18 +61,23 @@
           <div class="swiper-button-next" slot="button-next"></div>
         </swiper>
       </div>
+      
     </div>
     <div v-else>
       <div v-if="searchTerm.length" class="result-notification"> No results found for " {{searchTerm }} " </div>
     </div>
-    <div class="spinner-border" style="width: 30px; height: 30px;" role="status">
-        <span class="sr-only">Loading...</span>
-      </div>
-    <div class="loader" v-bind:class="{ 'active': showSpinner }">
-      <div class="spinner-border" style="width: 30px; height: 30px;" role="status">
-        <span class="sr-only">Loading...</span>
-      </div>
-    </div>
 
+  </div>
+  <div class="loader-container" v-bind:class="{ 'active': showSpinner }" >
+      <div class="row">
+          <div class="col-md-12">
+              <div class="loader">
+                  <p>Loading...</p>
+                  <div class="loader-inner"></div>
+                  <div class="loader-inner"></div>
+                  <div class="loader-inner"></div>
+              </div>
+          </div>
+      </div>
   </div>
 </div>

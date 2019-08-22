@@ -92,6 +92,8 @@ const itunesSearch = {
      * @return {[type]}     [description]
      */
     searchDataErrorHandler(err) {
+      this.searchResults = {};
+      this.showSpinner = false;
       console.log("search returned error", err);
     },
     /**
